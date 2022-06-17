@@ -1,0 +1,66 @@
+---
+title: "SICSS Project"
+author: Ela Castellanos-Reyes
+date: '06-16-22'
+output: html_notebook
+
+---
+# Prepare workspace
+The project is already in my preferred working directory.
+Regarding loading package pdftools: #When prompted if want to install from sources the packages whihc need compilation say NO. Explanation here https://community.rstudio.com/t/meaning-of-common-message-when-install-a-package-there-are-binary-versions-available-but-the-source-versions-are-later/2431  
+
+```{r}
+pacman::p_load(
+  tidyverse,
+  pdftools 
+)
+
+install.packages("pdftools")
+#setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)
+```
+
+I'm using this website as help https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/ 
+
+```{r}
+file_vector <- list.files(path = "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data")
+View(file_vector)
+```
+
+```{r}
+
+grepl(".pdf",file_list)
+
+pdf_list <- file_vector[grepl(".pdf",file_list)]
+```
+
+
+Only loading one doc. The result looks messy. 
+```{r}
+pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf") 
+```
+The code below separates by lines. 
+```{r}
+pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf")  %>% 
+  strsplit(split = "\n") 
+```
+
+To make an empty df for all our projects 
+```{r}
+corpus_raw <- data.frame("organization" = c(),"text" = c())
+
+for (i in 1:length(pdf_list)){
+print(i)
+ pdf_text(paste("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/", pdf_list[i],sep = "")) %>% 
+ strsplit("\n")-> document_text
+data.frame("company" = gsub(x =pdf_list[i],pattern = ".pdf", replacement = ""), 
+ "text" = document_text, stringsAsFactors = FALSE) -> document
+colnames(document) <- c("company", "text")
+corpus_raw <- rbind(corpus_raw,document) 
+}
+
+```
+
+
+
+
+

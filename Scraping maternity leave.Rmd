@@ -1,0 +1,36 @@
+---
+title: "Maternity Leave Data"
+author: "Benjamin Lira"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Scraping maternity leave data
+Junming Huang shows that there are differences in scientific production between men and women, and that these differences are heterogeneous across nations. One question that was raised is whether these differences are explainable from differences in maternity leave laws. Let's try to scrape data on this to test this idea.
+
+## Data source
+https://www.ilo.org/global/about-the-ilo/newsroom/news/WCMS_008009/lang--en/index.htm
+
+## Scraping
+
+```{r}
+library(rvest)
+library(tidyverse)
+url = "https://www.ilo.org/global/about-the-ilo/newsroom/news/WCMS_008009/lang--en/index.htm"
+website = read_html(url)
+data = website |> 
+  html_table(header = T) %>% 
+  `[[`(1) |> 
+  select(1:3) |> 
+  filter(!(useful::find.case(Country,"upper"))) # Drop regions that are all uppercase
+```
+
+We have succesfully scraped Maternity leave data!
+```{r}
+data$`Length of Leave`
+```
+
