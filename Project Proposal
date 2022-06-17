@@ -8,3 +8,8 @@ What will you collect?
 - Text data scrapped from ourganizational websites and online publications 
 - Text data from PDFs of organizational reports and publications, obtained from organization websites.
 What are the next steps? 
+Scrape URLs (Bonnie and Kadija)
+PDF to text (Ela): output is a dataframe with one column is document name/ID and one column is all of the text as a single string
+Clean text (TBD): remove stop words, special characters, regular expressions, etc.
+Tokenize text into individual words to examine term frequency (TBD)
+Optional: topic models (create term document matrix, use LDA) (TBD)
