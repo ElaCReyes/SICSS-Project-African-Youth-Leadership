@@ -12,26 +12,32 @@ Regarding loading package pdftools: #When prompted if want to install from sourc
 ```{r}
 pacman::p_load(
   tidyverse,
-  pdftools 
+  pdftools, 
+  tesseract
 )
 
-install.packages("pdftools")
+setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
+#install.packages("pdftools")
 #setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)
 ```
 
 I'm using this website as help https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/ 
 
 ```{r}
-file_vector <- list.files(path = "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data")
-View(file_vector)
+getwd()
+```
+
+
+```{r}
+file_vector <- list.files(path = "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
+#View(file_vector)
 ```
 
 ```{r}
-
-grepl(".pdf",file_list)
-
-pdf_list <- file_vector[grepl(".pdf",file_list)]
+results <- lapply(file_vector, pdf_text)
 ```
+
+
 
 
 Only loading one doc. The result looks messy. 
@@ -44,21 +50,10 @@ pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Projec
   strsplit(split = "\n") 
 ```
 
-To make an empty df for all our projects 
-```{r}
-corpus_raw <- data.frame("organization" = c(),"text" = c())
 
-for (i in 1:length(pdf_list)){
-print(i)
- pdf_text(paste("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/", pdf_list[i],sep = "")) %>% 
- strsplit("\n")-> document_text
-data.frame("company" = gsub(x =pdf_list[i],pattern = ".pdf", replacement = ""), 
- "text" = document_text, stringsAsFactors = FALSE) -> document
-colnames(document) <- c("company", "text")
-corpus_raw <- rbind(corpus_raw,document) 
-}
 
-```
+
+
 
 
 

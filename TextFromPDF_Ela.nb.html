@@ -1770,94 +1770,99 @@ loading package pdftools: #When prompted if want to install from sources
 the packages whihc need compilation say NO. Explanation here <a href="https://community.rstudio.com/t/meaning-of-common-message-when-install-a-package-there-are-binary-versions-available-but-the-source-versions-are-later/2431" class="uri">https://community.rstudio.com/t/meaning-of-common-message-when-install-a-package-there-are-binary-versions-available-but-the-source-versions-are-later/2431</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcyhcInBkZnRvb2xzXCIpXG5cbmBgYCJ9 -->
-<pre class="r"><code>install.packages(&quot;pdftools&quot;)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYWxzbyBpbnN0YWxsaW5nIHRoZSBkZXBlbmRlbmN5IOKAmHFwZGbigJlcbiJ9 -->
-<pre><code>also installing the dependency ‘qpdf’</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG4gIFRoZXJlIGFyZSBiaW5hcnkgdmVyc2lvbnMgYXZhaWxhYmxlIGJ1dCB0aGUgc291cmNlIHZlcnNpb25zIGFyZSBsYXRlcjpcbiJ9 -->
-<pre><code>
-  There are binary versions available but the source versions are later:</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMiDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUExMVEwVTdFSUJEY2E0dDZKSm96ZmtlSnZiNzRBY1lQTUpyY20rRmFUaHM1cUVDai92enBna3U4YXdoaFo1Z2Rsbm04MzdSOHd3R2doQXBYeWJBRTl2ejBVTjhCVkFXQ0JkTExlSDZoNkNZcEFWYTRDN29vRzlGUXlWb1J3ZWs5YThSYTNQNHIxa25Ca3lMYXAzM3lGRE55cnp6WmxFU2ViUWNqM1hkRzNrNnVVNFN1alZLOWYrbnNmaHkwRElNMU04ZWxzNS9pMkRVUFYzMk0vWTdxQ3l5RHRkclB4K20wOUxreGs3eVhRWXFkUTA5RWgxbkx1UjNqRk5oVXhNallySG5oWnNScU1uRzZ2dTdlSnZOZU55MGxST25BSlozRlVWMyt2Vm44a0JmTDBTanpPcGdjRGROeXF6U0JLNHdocFNCR041aVF2NEtzRjhFR21YVzh3eFNJU1orRHd5OUdrV0IxS2dJQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["binary"],"name":[1],"type":["chr"],"align":["left"]},{"label":["source"],"name":[2],"type":["chr"],"align":["left"]},{"label":["needs_compilation"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"1.1","2":"1.2.0","3":"TRUE","_rn_":"qpdf"},{"1":"3.1.1","2":"3.2.1","3":"TRUE","_rn_":"pdftools"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubm9cbmBgYCJ9 -->
-<pre class="r"><code>no</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjAvcXBkZl8xLjEudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA0NTIzMjgyIGJ5dGVzICg0LjMgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCA0LjMgTUJcblxudHJ5aW5nIFVSTCAnaHR0cHM6Ly9jcmFuLnJzdHVkaW8uY29tL2Jpbi9tYWNvc3gvY29udHJpYi80LjAvcGRmdG9vbHNfMy4xLjEudGd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA3MjQyNTU5IGJ5dGVzICg2LjkgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCA2LjkgTUJcbiJ9 -->
-<pre><code>trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.0/qpdf_1.1.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 4523282 bytes (4.3 MB)
-==================================================
-downloaded 4.3 MB
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFjbWFuOjpwX2xvYWQoXG4gIHRpZHl2ZXJzZSxcbiAgcGRmdG9vbHMsIFxuICB0ZXNzZXJhY3Rcbilcblxuc2V0d2QoXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9TSUNTUy1Qcm9qZWN0LUFmcmljYW4tWW91dGgtTGVhZGVyc2hpcC9XZWJzY3JhcGVkIGRhdGFcIilcbmBgYCJ9 -->
+<pre class="r"><code>pacman::p_load(
+  tidyverse,
+  pdftools, 
+  tesseract
+)
 
-trying URL &#39;https://cran.rstudio.com/bin/macosx/contrib/4.0/pdftools_3.1.1.tgz&#39;
-Content type &#39;application/x-gzip&#39; length 7242559 bytes (6.9 MB)
-==================================================
-downloaded 6.9 MB</code></pre>
+setwd(&quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdhcyBjaGFuZ2VkIHRvIC9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YSBpbnNpZGUgYSBub3RlYm9vayBjaHVuay4gVGhlIHdvcmtpbmcgZGlyZWN0b3J5IHdpbGwgYmUgcmVzZXQgd2hlbiB0aGUgY2h1bmsgaXMgZmluaXNoZWQgcnVubmluZy4gVXNlIHRoZSBrbml0ciByb290LmRpciBvcHRpb24gaW4gdGhlIHNldHVwIGNodW5rIHRvIGNoYW5nZSB0aGUgd29ya2luZyBkaXJlY3RvcnkgZm9yIG5vdGVib29rIGNodW5rcy5cbiJ9 -->
+<pre><code>Warning: The working directory was changed to /Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks.</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5UaGUgZG93bmxvYWRlZCBiaW5hcnkgcGFja2FnZXMgYXJlIGluXG5cdC92YXIvZm9sZGVycy85di9qdnczZmtrOTZxc2Y0Y2xwcXpfX2I0ZHIwMDAwZ24vVC8vUnRtcHh2ZGxoYS9kb3dubG9hZGVkX3BhY2thZ2VzXG4ifQ== -->
-<pre><code>
-The downloaded binary packages are in
-    /var/folders/9v/jvw3fkk96qsf4clpqz__b4dr0000gn/T//Rtmpxvdlha/downloaded_packages</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2luc3RhbGwucGFja2FnZXMoXCJwZGZ0b29sc1wiKVxuI3NldHdkKC9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0LylcbmBgYCJ9 -->
+<pre class="r"><code>#install.packages(&quot;pdftools&quot;)
+#setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>I’m using this website as help <a href="https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/" class="uri">https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZV92ZWN0b3IgPC0gbGlzdC5maWxlcyhwYXRoID0gXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGFcIilcblZpZXcoZmlsZV92ZWN0b3IpXG5gYGAifQ== -->
-<pre class="r"><code>file_vector &lt;- list.files(path = &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data&quot;)
-View(file_vector)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuYGBgIn0= -->
+<pre class="r"><code>getwd()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvU0lDU1MtUHJvamVjdC1BZnJpY2FuLVlvdXRoLUxlYWRlcnNoaXBcIlxuIn0= -->
+<pre><code>[1] &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZV92ZWN0b3IgPC0gbGlzdC5maWxlcyhwYXRoID0gXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9TSUNTUy1Qcm9qZWN0LUFmcmljYW4tWW91dGgtTGVhZGVyc2hpcC9XZWJzY3JhcGVkIGRhdGFcIilcbiNWaWV3KGZpbGVfdmVjdG9yKVxuYGBgIn0= -->
+<pre class="r"><code>file_vector &lt;- list.files(path = &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data&quot;)
+#View(file_vector)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JlcGwoXCIucGRmXCIsZmlsZV9saXN0KVxuXG5gYGAifQ== -->
-<pre class="r"><code>grepl(&quot;.pdf&quot;,file_list)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzdWx0cyA8LSBsYXBwbHkoZmlsZV92ZWN0b3IsIHBkZl90ZXh0KVxuYGBgIn0= -->
+<pre class="r"><code>results &lt;- lapply(file_vector, pdf_text)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZ3JlcGwoXCIucGRmXCIsIGZpbGVfbGlzdCkgOiBvYmplY3QgJ2ZpbGVfbGlzdCcgbm90IGZvdW5kXG4ifQ== -->
-<pre><code>Error in grepl(&quot;.pdf&quot;, file_list) : object &#39;file_list&#39; not found</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbm9ybWFsaXplUGF0aChwZGYsIG11c3RXb3JrID0gVFJVRSkgOiBcbiAgcGF0aFsxXT1cIkFZTDBTMjNfQnJpZGdlMlJ3YW5kYS5wZGZcIjogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeVxuIn0= -->
+<pre><code>Error in normalizePath(pdf, mustWork = TRUE) : 
+  path[1]=&quot;AYL0S23_Bridge2Rwanda.pdf&quot;: No such file or directory</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Only loading one doc. The result looks messy.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGRmX3RleHQoXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmXCIpIFxuYGBgIn0= -->
-<pre class="r"><code>pdf_text(&quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf&quot;) </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>The code below separates by lines.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGRmX3RleHQoXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmXCIpICAlPiUgXG4gIHN0cnNwbGl0KHNwbGl0ID0gXCJcXG5cIikgXG5gYGAifQ== -->
-<pre class="r"><code>pdf_text(&quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf&quot;)  %&gt;% 
-  strsplit(split = &quot;\n&quot;) </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>To make an empty df for all our projects</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29ycHVzX3JhdyA8LSBkYXRhLmZyYW1lKFwib3JnYW5pemF0aW9uXCIgPSBjKCksXCJ0ZXh0XCIgPSBjKCkpXG5gYGAifQ== -->
-<pre class="r"><code>corpus_raw &lt;- data.frame(&quot;organization&quot; = c(),&quot;text&quot; = c())</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZ3JlcGwoXFwucGRmXFwsZmlsZV9saXN0KVxuXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+grepl(\.pdf\,file_list)
+</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZ3JlcGwoXFwucGRmXFwsIGZpbGVfbGlzdCkgOiBvYmplY3QgJ2ZpbGVfbGlzdCcgbm90IGZvdW5kXG4ifQ== --&gt;
+</code></pre>
+<p>Error in grepl(.pdf, file_list) : object ‘file_list’ not found</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+The code below separates by lines. 
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGRmX3RleHQoXFwvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmXFwpICAlPiUgXG4gIHN0cnNwbGl0KHNwbGl0ID0gXFxcXG5cXCkgXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+pdf_text(\/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf\)  %&gt;% 
+  strsplit(split = \\n\) </code></pre>
+<p>```</p>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU0lDU1MgUHJvamVjdCIKYXV0aG9yOiBFbGEgQ2FzdGVsbGFub3MtUmV5ZXMKZGF0ZTogJzA2LTE2LTIyJwpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKCi0tLQojIFByZXBhcmUgd29ya3NwYWNlClRoZSBwcm9qZWN0IGlzIGFscmVhZHkgaW4gbXkgcHJlZmVycmVkIHdvcmtpbmcgZGlyZWN0b3J5LgpSZWdhcmRpbmcgbG9hZGluZyBwYWNrYWdlIHBkZnRvb2xzOiAjV2hlbiBwcm9tcHRlZCBpZiB3YW50IHRvIGluc3RhbGwgZnJvbSBzb3VyY2VzIHRoZSBwYWNrYWdlcyB3aGloYyBuZWVkIGNvbXBpbGF0aW9uIHNheSBOTy4gRXhwbGFuYXRpb24gaGVyZSBodHRwczovL2NvbW11bml0eS5yc3R1ZGlvLmNvbS90L21lYW5pbmctb2YtY29tbW9uLW1lc3NhZ2Utd2hlbi1pbnN0YWxsLWEtcGFja2FnZS10aGVyZS1hcmUtYmluYXJ5LXZlcnNpb25zLWF2YWlsYWJsZS1idXQtdGhlLXNvdXJjZS12ZXJzaW9ucy1hcmUtbGF0ZXIvMjQzMSAgCgpgYGB7cn0KcGFjbWFuOjpwX2xvYWQoCiAgdGlkeXZlcnNlLAogIHBkZnRvb2xzIAopCgppbnN0YWxsLnBhY2thZ2VzKCJwZGZ0b29scyIpCiNzZXR3ZCgvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC8pCmBgYAoKSSdtIHVzaW5nIHRoaXMgd2Vic2l0ZSBhcyBoZWxwIGh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tLzIwMTgvMDEvaG93LXRvLWV4dHJhY3QtZGF0YS1mcm9tLWEtcGRmLWZpbGUtd2l0aC1yLyAKCmBgYHtyfQpmaWxlX3ZlY3RvciA8LSBsaXN0LmZpbGVzKHBhdGggPSAiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvV2Vic2NyYXBlZCBkYXRhIikKVmlldyhmaWxlX3ZlY3RvcikKYGBgCgpgYGB7cn0KCmdyZXBsKCIucGRmIixmaWxlX2xpc3QpCgpwZGZfbGlzdCA8LSBmaWxlX3ZlY3RvcltncmVwbCgiLnBkZiIsZmlsZV9saXN0KV0KYGBgCgoKT25seSBsb2FkaW5nIG9uZSBkb2MuIFRoZSByZXN1bHQgbG9va3MgbWVzc3kuIApgYGB7cn0KcGRmX3RleHQoIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1dlYnNjcmFwZWQgZGF0YS9BWUxTMDAxX0FMQS5wZGYiKSAKYGBgClRoZSBjb2RlIGJlbG93IHNlcGFyYXRlcyBieSBsaW5lcy4gCmBgYHtyfQpwZGZfdGV4dCgiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvV2Vic2NyYXBlZCBkYXRhL0FZTFMwMDFfQUxBLnBkZiIpICAlPiUgCiAgc3Ryc3BsaXQoc3BsaXQgPSAiXG4iKSAKYGBgCgpUbyBtYWtlIGFuIGVtcHR5IGRmIGZvciBhbGwgb3VyIHByb2plY3RzIApgYGB7cn0KY29ycHVzX3JhdyA8LSBkYXRhLmZyYW1lKCJvcmdhbml6YXRpb24iID0gYygpLCJ0ZXh0IiA9IGMoKSkKCmZvciAoaSBpbiAxOmxlbmd0aChwZGZfbGlzdCkpewpwcmludChpKQogcGRmX3RleHQocGFzdGUoIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1dlYnNjcmFwZWQgZGF0YS8iLCBwZGZfbGlzdFtpXSxzZXAgPSAiIikpICU+JSAKIHN0cnNwbGl0KCJcbiIpLT4gZG9jdW1lbnRfdGV4dApkYXRhLmZyYW1lKCJjb21wYW55IiA9IGdzdWIoeCA9cGRmX2xpc3RbaV0scGF0dGVybiA9ICIucGRmIiwgcmVwbGFjZW1lbnQgPSAiIiksIAogInRleHQiID0gZG9jdW1lbnRfdGV4dCwgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKSAtPiBkb2N1bWVudApjb2xuYW1lcyhkb2N1bWVudCkgPC0gYygiY29tcGFueSIsICJ0ZXh0IikKY29ycHVzX3JhdyA8LSByYmluZChjb3JwdXNfcmF3LGRvY3VtZW50KSAKfQoKYGBgCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU0lDU1MgUHJvamVjdCIKYXV0aG9yOiBFbGEgQ2FzdGVsbGFub3MtUmV5ZXMKZGF0ZTogJzA2LTE2LTIyJwpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKCi0tLQojIFByZXBhcmUgd29ya3NwYWNlClRoZSBwcm9qZWN0IGlzIGFscmVhZHkgaW4gbXkgcHJlZmVycmVkIHdvcmtpbmcgZGlyZWN0b3J5LgpSZWdhcmRpbmcgbG9hZGluZyBwYWNrYWdlIHBkZnRvb2xzOiAjV2hlbiBwcm9tcHRlZCBpZiB3YW50IHRvIGluc3RhbGwgZnJvbSBzb3VyY2VzIHRoZSBwYWNrYWdlcyB3aGloYyBuZWVkIGNvbXBpbGF0aW9uIHNheSBOTy4gRXhwbGFuYXRpb24gaGVyZSBodHRwczovL2NvbW11bml0eS5yc3R1ZGlvLmNvbS90L21lYW5pbmctb2YtY29tbW9uLW1lc3NhZ2Utd2hlbi1pbnN0YWxsLWEtcGFja2FnZS10aGVyZS1hcmUtYmluYXJ5LXZlcnNpb25zLWF2YWlsYWJsZS1idXQtdGhlLXNvdXJjZS12ZXJzaW9ucy1hcmUtbGF0ZXIvMjQzMSAgCgpgYGB7cn0KcGFjbWFuOjpwX2xvYWQoCiAgdGlkeXZlcnNlLAogIHBkZnRvb2xzLCAKICB0ZXNzZXJhY3QKKQoKc2V0d2QoIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YSIpCiNpbnN0YWxsLnBhY2thZ2VzKCJwZGZ0b29scyIpCiNzZXR3ZCgvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC8pCmBgYAoKSSdtIHVzaW5nIHRoaXMgd2Vic2l0ZSBhcyBoZWxwIGh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tLzIwMTgvMDEvaG93LXRvLWV4dHJhY3QtZGF0YS1mcm9tLWEtcGRmLWZpbGUtd2l0aC1yLyAKCmBgYHtyfQpnZXR3ZCgpCmBgYAoKCmBgYHtyfQpmaWxlX3ZlY3RvciA8LSBsaXN0LmZpbGVzKHBhdGggPSAiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvU0lDU1MtUHJvamVjdC1BZnJpY2FuLVlvdXRoLUxlYWRlcnNoaXAvV2Vic2NyYXBlZCBkYXRhIikKI1ZpZXcoZmlsZV92ZWN0b3IpCmBgYAoKYGBge3J9CnJlc3VsdHMgPC0gbGFwcGx5KGZpbGVfdmVjdG9yLCBwZGZfdGV4dCkKYGBgCgoKCgpPbmx5IGxvYWRpbmcgb25lIGRvYy4gVGhlIHJlc3VsdCBsb29rcyBtZXNzeS4gCmBgYHtyfQpwZGZfdGV4dCgiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvV2Vic2NyYXBlZCBkYXRhL0FZTFMwMDFfQUxBLnBkZiIpIApgYGAKVGhlIGNvZGUgYmVsb3cgc2VwYXJhdGVzIGJ5IGxpbmVzLiAKYGBge3J9CnBkZl90ZXh0KCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmIikgICU+JSAKICBzdHJzcGxpdChzcGxpdCA9ICJcbiIpIApgYGAKCgoKCgoKCgoKCg==</div>
 
 
 
