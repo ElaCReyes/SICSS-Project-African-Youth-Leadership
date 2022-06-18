@@ -23,37 +23,34 @@ setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/S
 
 I'm using this website as help https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/ 
 
+
+Create an object that has the path of my folder with pdfs
 ```{r}
-getwd()
+dest <- "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data"
 ```
 
-
+Create a vector that has the name of the PDF file names. The argument full.names is necessary to obtain the full path. 
 ```{r}
-file_vector <- list.files(path = "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
-#View(file_vector)
+myfiles <- list.files(path = dest, pattern = "pdf", full.names = TRUE)
 ```
 
+There was a corrupt file!!! "AYLS038_ColumbaLeadership.pdf". After deleting the file things worked well.
 ```{r}
-results <- lapply(file_vector, pdf_text)
+corpus_raw <- data.frame("org" = c(),"text" = c())
 ```
 
-
-
-
-Only loading one doc. The result looks messy. 
+Successful loop. Previous versions are in "ElaSandbox"
 ```{r}
-pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf") 
+for (i in 1:length(myfiles)){
+  rawtext <- pdf_text(myfiles[i], opw = "", upw = "") 
+  document <- data.frame( #Creates new data frame
+                        "org" = gsub(x =myfiles[i],pattern = ".pdf", replacement = ""), #This uses the gsub function of the regular expressions in R
+                         "text" = x, stringsAsFactors = FALSE
+                        )
+  colnames(document) <- c("org", "text")
+  corpus_raw <- rbind(corpus_raw,document)
+}
 ```
-The code below separates by lines. 
-```{r}
-pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf")  %>% 
-  strsplit(split = "\n") 
-```
-
-
-
-
-
 
 
 

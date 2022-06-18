@@ -1789,80 +1789,49 @@ setwd(&quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Proj
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>I’m using this website as help <a href="https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/" class="uri">https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/</a></p>
+<p>Create an object that has the path of my folder with pdfs</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0d2QoKVxuYGBgIn0= -->
-<pre class="r"><code>getwd()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvU0lDU1MtUHJvamVjdC1BZnJpY2FuLVlvdXRoLUxlYWRlcnNoaXBcIlxuIn0= -->
-<pre><code>[1] &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZV92ZWN0b3IgPC0gbGlzdC5maWxlcyhwYXRoID0gXCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9TSUNTUy1Qcm9qZWN0LUFmcmljYW4tWW91dGgtTGVhZGVyc2hpcC9XZWJzY3JhcGVkIGRhdGFcIilcbiNWaWV3KGZpbGVfdmVjdG9yKVxuYGBgIn0= -->
-<pre class="r"><code>file_vector &lt;- list.files(path = &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data&quot;)
-#View(file_vector)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVzdCA8LSBcIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YVwiXG5gYGAifQ== -->
+<pre class="r"><code>dest &lt;- &quot;/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data&quot;</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Create a vector that has the name of the PDF file names. The argument
+full.names is necessary to obtain the full path.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzdWx0cyA8LSBsYXBwbHkoZmlsZV92ZWN0b3IsIHBkZl90ZXh0KVxuYGBgIn0= -->
-<pre class="r"><code>results &lt;- lapply(file_vector, pdf_text)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXlmaWxlcyA8LSBsaXN0LmZpbGVzKHBhdGggPSBkZXN0LCBwYXR0ZXJuID0gXCJwZGZcIiwgZnVsbC5uYW1lcyA9IFRSVUUpXG5gYGAifQ== -->
+<pre class="r"><code>myfiles &lt;- list.files(path = dest, pattern = &quot;pdf&quot;, full.names = TRUE)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbm9ybWFsaXplUGF0aChwZGYsIG11c3RXb3JrID0gVFJVRSkgOiBcbiAgcGF0aFsxXT1cIkFZTDBTMjNfQnJpZGdlMlJ3YW5kYS5wZGZcIjogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeVxuIn0= -->
-<pre><code>Error in normalizePath(pdf, mustWork = TRUE) : 
-  path[1]=&quot;AYL0S23_Bridge2Rwanda.pdf&quot;: No such file or directory</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Only loading one doc. The result looks messy.</p>
+<p>There was a corrupt file!!! “AYLS038_ColumbaLeadership.pdf”. After
+deleting the file things worked well.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZ3JlcGwoXFwucGRmXFwsZmlsZV9saXN0KVxuXG5gYGBcbmBgYCJ9 -->
-<pre class="r"><code>```r
-grepl(\.pdf\,file_list)
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZ3JlcGwoXFwucGRmXFwsIGZpbGVfbGlzdCkgOiBvYmplY3QgJ2ZpbGVfbGlzdCcgbm90IGZvdW5kXG4ifQ== --&gt;
-</code></pre>
-<p>Error in grepl(.pdf, file_list) : object ‘file_list’ not found</p>
-<pre><code>
-
-
-&lt;!-- rnb-output-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-The code below separates by lines. 
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGRmX3RleHQoXFwvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmXFwpICAlPiUgXG4gIHN0cnNwbGl0KHNwbGl0ID0gXFxcXG5cXCkgXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-pdf_text(\/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/Webscraped data/AYLS001_ALA.pdf\)  %&gt;% 
-  strsplit(split = \\n\) </code></pre>
-<p>```</p>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Successful loop. Previous versions are in “ElaSandbox”</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIDE6bGVuZ3RoKG15ZmlsZXMpKXtcbiAgcmF3dGV4dCA8LSBwZGZfdGV4dChteWZpbGVzW2ldLCBvcHcgPSBcIlwiLCB1cHcgPSBcIlwiKSBcbiAgZG9jdW1lbnQgPC0gZGF0YS5mcmFtZSggI0NyZWF0ZXMgbmV3IGRhdGEgZnJhbWVcbiAgICAgICAgICAgICAgICAgICAgICAgIFwib3JnXCIgPSBnc3ViKHggPW15ZmlsZXNbaV0scGF0dGVybiA9IFwiLnBkZlwiLCByZXBsYWNlbWVudCA9IFwiXCIpLCAjVGhpcyB1c2VzIHRoZSBnc3ViIGZ1bmN0aW9uIG9mIHRoZSByZWd1bGFyIGV4cHJlc3Npb25zIGluIFJcbiAgICAgICAgICAgICAgICAgICAgICAgICBcInRleHRcIiA9IHgsIHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRVxuICAgICAgICAgICAgICAgICAgICAgICAgKVxuICBjb2xuYW1lcyhkb2N1bWVudCkgPC0gYyhcIm9yZ1wiLCBcInRleHRcIilcbiAgY29ycHVzX3JhdyA8LSByYmluZChjb3JwdXNfcmF3LGRvY3VtZW50KVxufVxuYGBgIn0= -->
+<pre class="r"><code>for (i in 1:length(myfiles)){
+  rawtext &lt;- pdf_text(myfiles[i], opw = &quot;&quot;, upw = &quot;&quot;) 
+  document &lt;- data.frame( #Creates new data frame
+                        &quot;org&quot; = gsub(x =myfiles[i],pattern = &quot;.pdf&quot;, replacement = &quot;&quot;), #This uses the gsub function of the regular expressions in R
+                         &quot;text&quot; = x, stringsAsFactors = FALSE
+                        )
+  colnames(document) &lt;- c(&quot;org&quot;, &quot;text&quot;)
+  corpus_raw &lt;- rbind(corpus_raw,document)
+}</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU0lDU1MgUHJvamVjdCIKYXV0aG9yOiBFbGEgQ2FzdGVsbGFub3MtUmV5ZXMKZGF0ZTogJzA2LTE2LTIyJwpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKCi0tLQojIFByZXBhcmUgd29ya3NwYWNlClRoZSBwcm9qZWN0IGlzIGFscmVhZHkgaW4gbXkgcHJlZmVycmVkIHdvcmtpbmcgZGlyZWN0b3J5LgpSZWdhcmRpbmcgbG9hZGluZyBwYWNrYWdlIHBkZnRvb2xzOiAjV2hlbiBwcm9tcHRlZCBpZiB3YW50IHRvIGluc3RhbGwgZnJvbSBzb3VyY2VzIHRoZSBwYWNrYWdlcyB3aGloYyBuZWVkIGNvbXBpbGF0aW9uIHNheSBOTy4gRXhwbGFuYXRpb24gaGVyZSBodHRwczovL2NvbW11bml0eS5yc3R1ZGlvLmNvbS90L21lYW5pbmctb2YtY29tbW9uLW1lc3NhZ2Utd2hlbi1pbnN0YWxsLWEtcGFja2FnZS10aGVyZS1hcmUtYmluYXJ5LXZlcnNpb25zLWF2YWlsYWJsZS1idXQtdGhlLXNvdXJjZS12ZXJzaW9ucy1hcmUtbGF0ZXIvMjQzMSAgCgpgYGB7cn0KcGFjbWFuOjpwX2xvYWQoCiAgdGlkeXZlcnNlLAogIHBkZnRvb2xzLCAKICB0ZXNzZXJhY3QKKQoKc2V0d2QoIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YSIpCiNpbnN0YWxsLnBhY2thZ2VzKCJwZGZ0b29scyIpCiNzZXR3ZCgvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC8pCmBgYAoKSSdtIHVzaW5nIHRoaXMgd2Vic2l0ZSBhcyBoZWxwIGh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tLzIwMTgvMDEvaG93LXRvLWV4dHJhY3QtZGF0YS1mcm9tLWEtcGRmLWZpbGUtd2l0aC1yLyAKCmBgYHtyfQpnZXR3ZCgpCmBgYAoKCmBgYHtyfQpmaWxlX3ZlY3RvciA8LSBsaXN0LmZpbGVzKHBhdGggPSAiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvU0lDU1MtUHJvamVjdC1BZnJpY2FuLVlvdXRoLUxlYWRlcnNoaXAvV2Vic2NyYXBlZCBkYXRhIikKI1ZpZXcoZmlsZV92ZWN0b3IpCmBgYAoKYGBge3J9CnJlc3VsdHMgPC0gbGFwcGx5KGZpbGVfdmVjdG9yLCBwZGZfdGV4dCkKYGBgCgoKCgpPbmx5IGxvYWRpbmcgb25lIGRvYy4gVGhlIHJlc3VsdCBsb29rcyBtZXNzeS4gCmBgYHtyfQpwZGZfdGV4dCgiL1VzZXJzL0VsYSAxL0RvY3VtZW50cy9MRFQgTWFjLzcuIFByb2Zlc3Npb25hbERldmVsb3BtZW50L1NJQ1NTX1Byb2plY3QvV2Vic2NyYXBlZCBkYXRhL0FZTFMwMDFfQUxBLnBkZiIpIApgYGAKVGhlIGNvZGUgYmVsb3cgc2VwYXJhdGVzIGJ5IGxpbmVzLiAKYGBge3J9CnBkZl90ZXh0KCIvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC9XZWJzY3JhcGVkIGRhdGEvQVlMUzAwMV9BTEEucGRmIikgICU+JSAKICBzdHJzcGxpdChzcGxpdCA9ICJcbiIpIApgYGAKCgoKCgoKCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU0lDU1MgUHJvamVjdCIKYXV0aG9yOiBFbGEgQ2FzdGVsbGFub3MtUmV5ZXMKZGF0ZTogJzA2LTE2LTIyJwpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKCi0tLQojIFByZXBhcmUgd29ya3NwYWNlClRoZSBwcm9qZWN0IGlzIGFscmVhZHkgaW4gbXkgcHJlZmVycmVkIHdvcmtpbmcgZGlyZWN0b3J5LgpSZWdhcmRpbmcgbG9hZGluZyBwYWNrYWdlIHBkZnRvb2xzOiAjV2hlbiBwcm9tcHRlZCBpZiB3YW50IHRvIGluc3RhbGwgZnJvbSBzb3VyY2VzIHRoZSBwYWNrYWdlcyB3aGloYyBuZWVkIGNvbXBpbGF0aW9uIHNheSBOTy4gRXhwbGFuYXRpb24gaGVyZSBodHRwczovL2NvbW11bml0eS5yc3R1ZGlvLmNvbS90L21lYW5pbmctb2YtY29tbW9uLW1lc3NhZ2Utd2hlbi1pbnN0YWxsLWEtcGFja2FnZS10aGVyZS1hcmUtYmluYXJ5LXZlcnNpb25zLWF2YWlsYWJsZS1idXQtdGhlLXNvdXJjZS12ZXJzaW9ucy1hcmUtbGF0ZXIvMjQzMSAgCgpgYGB7cn0KcGFjbWFuOjpwX2xvYWQoCiAgdGlkeXZlcnNlLAogIHBkZnRvb2xzLCAKICB0ZXNzZXJhY3QKKQoKc2V0d2QoIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YSIpCiNpbnN0YWxsLnBhY2thZ2VzKCJwZGZ0b29scyIpCiNzZXR3ZCgvVXNlcnMvRWxhIDEvRG9jdW1lbnRzL0xEVCBNYWMvNy4gUHJvZmVzc2lvbmFsRGV2ZWxvcG1lbnQvU0lDU1NfUHJvamVjdC8pCmBgYAoKSSdtIHVzaW5nIHRoaXMgd2Vic2l0ZSBhcyBoZWxwIGh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tLzIwMTgvMDEvaG93LXRvLWV4dHJhY3QtZGF0YS1mcm9tLWEtcGRmLWZpbGUtd2l0aC1yLyAKCgpDcmVhdGUgYW4gb2JqZWN0IHRoYXQgaGFzIHRoZSBwYXRoIG9mIG15IGZvbGRlciB3aXRoIHBkZnMKYGBge3J9CmRlc3QgPC0gIi9Vc2Vycy9FbGEgMS9Eb2N1bWVudHMvTERUIE1hYy83LiBQcm9mZXNzaW9uYWxEZXZlbG9wbWVudC9TSUNTU19Qcm9qZWN0L1NJQ1NTLVByb2plY3QtQWZyaWNhbi1Zb3V0aC1MZWFkZXJzaGlwL1dlYnNjcmFwZWQgZGF0YSIKYGBgCgpDcmVhdGUgYSB2ZWN0b3IgdGhhdCBoYXMgdGhlIG5hbWUgb2YgdGhlIFBERiBmaWxlIG5hbWVzLiBUaGUgYXJndW1lbnQgZnVsbC5uYW1lcyBpcyBuZWNlc3NhcnkgdG8gb2J0YWluIHRoZSBmdWxsIHBhdGguIApgYGB7cn0KbXlmaWxlcyA8LSBsaXN0LmZpbGVzKHBhdGggPSBkZXN0LCBwYXR0ZXJuID0gInBkZiIsIGZ1bGwubmFtZXMgPSBUUlVFKQpgYGAKClRoZXJlIHdhcyBhIGNvcnJ1cHQgZmlsZSEhISAiQVlMUzAzOF9Db2x1bWJhTGVhZGVyc2hpcC5wZGYiLiBBZnRlciBkZWxldGluZyB0aGUgZmlsZSB0aGluZ3Mgd29ya2VkIHdlbGwuCmBgYHtyfQpjb3JwdXNfcmF3IDwtIGRhdGEuZnJhbWUoIm9yZyIgPSBjKCksInRleHQiID0gYygpKQpgYGAKClN1Y2Nlc3NmdWwgbG9vcC4gUHJldmlvdXMgdmVyc2lvbnMgYXJlIGluICJFbGFTYW5kYm94IgpgYGB7cn0KZm9yIChpIGluIDE6bGVuZ3RoKG15ZmlsZXMpKXsKICByYXd0ZXh0IDwtIHBkZl90ZXh0KG15ZmlsZXNbaV0sIG9wdyA9ICIiLCB1cHcgPSAiIikgCiAgZG9jdW1lbnQgPC0gZGF0YS5mcmFtZSggI0NyZWF0ZXMgbmV3IGRhdGEgZnJhbWUKICAgICAgICAgICAgICAgICAgICAgICAgIm9yZyIgPSBnc3ViKHggPW15ZmlsZXNbaV0scGF0dGVybiA9ICIucGRmIiwgcmVwbGFjZW1lbnQgPSAiIiksICNUaGlzIHVzZXMgdGhlIGdzdWIgZnVuY3Rpb24gb2YgdGhlIHJlZ3VsYXIgZXhwcmVzc2lvbnMgaW4gUgogICAgICAgICAgICAgICAgICAgICAgICAgInRleHQiID0geCwgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFCiAgICAgICAgICAgICAgICAgICAgICAgICkKICBjb2xuYW1lcyhkb2N1bWVudCkgPC0gYygib3JnIiwgInRleHQiKQogIGNvcnB1c19yYXcgPC0gcmJpbmQoY29ycHVzX3Jhdyxkb2N1bWVudCkKfQpgYGAKCgoKCgo=</div>
 
 
 
