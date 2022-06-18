@@ -5,6 +5,10 @@ pacman::p_load(
   tesseract
 )
 
+##############################################################
+###################### Text from PDF #########################
+##############################################################
+
 setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
 getwd()
 
@@ -63,3 +67,10 @@ for (i in 1:length(myfiles_latinx)){
 }
 
 print(y)
+
+##############################################################
+#################### Cleaning Corpus #########################
+##############################################################
+
+
+
