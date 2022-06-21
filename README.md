@@ -2,7 +2,7 @@
  Project for the SICSS
 
 To do:
-  1. Share the pdf data and list of urls to scrape (Rehana)
+- [x] Share the pdf data and list of urls to scrape (Rehana)
   2. Write proposal (Rehana)
   3. Scrape URLs (Bonnie and Kadija)
   4. PDF to text (Ela): output is a dataframe with one column is document name/ID and one column is all of the text as a single string
