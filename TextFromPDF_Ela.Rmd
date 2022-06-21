@@ -21,7 +21,10 @@ setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/S
 #setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)
 ```
 
-Websites used: 1. <https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/> 2. <https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/> 3. <https://www.i3s.unice.fr/~malapert/R/pdf/base-r.pdf>
+Websites used: 
+1. <https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/> 
+2. <https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/> 
+3. <https://www.i3s.unice.fr/~malapert/R/pdf/base-r.pdf>
 
 Create an object that has the path of my folder with pdfs
 
@@ -41,7 +44,7 @@ There was a corrupt file!!! "AYLS038_ColumbaLeadership.pdf". After deleting the 
 corpus_raw <- data.frame("org" = c(),"text" = c())
 ```
 
-Successful loop. Previous versions are in "ElaSandbox"
+Successful loop. Previous versions are in "ElaSandbox.R"
 
 ```{r}
 for (i in 1:length(myfiles)){
