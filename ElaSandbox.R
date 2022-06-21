@@ -45,7 +45,7 @@ for (i in 1:length(myfiles)){
 }
 print(x)
 
-#Successful Loop 2 organizing names 
+####Successful Loop 2 organizing names!!!!! 
 for (i in 1:length(myfiles)){
   rawtext <- pdf_text(myfiles[i], opw = "", upw = "") 
   document <- data.frame( #Creates new data frame
@@ -56,6 +56,9 @@ for (i in 1:length(myfiles)){
   corpus_raw <- rbind(corpus_raw,document)
 }
 
+#Saving doc
+getwd()
+write.csv(corpus_raw, file = "corpus_raw_trial.csv", row.names = FALSE)
 
 #Trial with own pdfs
 dest_latinx <- "/Users/Ela 1/Documents/LDT Mac/1. Research_2/Latinx in Academia/Dr. Masta readings"
