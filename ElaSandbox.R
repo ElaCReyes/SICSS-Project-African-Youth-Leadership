@@ -208,12 +208,74 @@ CorpusRaw <- myfiles_list  %>%
 
 # GREP
 CorpusRawClean <- CorpusRaw #Create a new one to have the middle point
-CorpusRawClean$TextData <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]", "", CorpusRawClean$TextData)
+CorpusRawClean$TextData <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]
+                                |ÿ| ÿ |  ÿ|ÿ  |ÿ5|ÿÿ|4ÿ|http
+                                ", "", CorpusRawClean$TextData)
 
-# Creating  a Corpus
-library(tm)
-OrgsCorpus <- Corpus(VectorSource(as.vector(CorpusRawClean$TextData))) 
-OrgsCorpus
 
-# TidyText
+
+# Tokenize
+TokenizedCorpusRawClean<- CorpusRawClean %>%
+  select(File,TextData) %>%
+  unnest_tokens("word", TextData)
+head(TokenizedCorpusRawClean)
+
+#Count Words but we still have the stopwords
+TokenizedCorpusRawClean %>% 
+group_by(word) %>% 
+  count() %>%
+    arrange(desc(freq))
+
+# word freq
+# 1             and 1385
+# 2              to 1232
+# 3             the 1147
+# 4              in  947
+
+#Remove stopwords with tidytext
+
+data(stop_words) #Load this data of tidytext
+View(stop_words)
+TidyCorpusRawClean <- TokenizedCorpusRawClean %>%
+  anti_join(stop_words) 
+  
+
+#RemoveDigits
+TidyCorpusRawClean <- TidyCorpusRawClean[-grep("\\b\\d+\\b", TidyCorpusRawClean$word),]
+
+# Count again to see the difference
+TidyCorpusRawClean %>% 
+  group_by(word) %>% 
+    count() %>% 
+      arrange(desc(freq)) %>% 
+  
+
+#With  Numbers
+# word freq
+# 1               8  422
+# 2       education  359
+# 3               9  340
+# 4        refugees  340
+# 5               1  301
+# 6           youth  300
+
+#Without Numbers
+# word freq
+# 1                     education  286
+# 2                         youth  249
+# 3                         youth  241
+# 4                      refugees  237
+# 5                       african  200
+
+
+
+# The Document Matrix
+# Using the TidyText I COULD NOT MAKE IT!
+
+TidyOrgCorpus <- Corpus(VectorSource(as.vector(TidyCorpusRawClean$word)))
+OrgCorpus_DTM <- DocumentTermMatrix(TidyOrgCorpus, control = list(wordLengths = c(2,
+                                                                         Inf)))
+inspect(OrgCorpus_DTM[1:25,3:8])
+
+
 
