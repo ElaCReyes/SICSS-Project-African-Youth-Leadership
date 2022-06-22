@@ -3,7 +3,11 @@ pacman::p_load(
   tidyverse,
   pdftools, 
   tesseract,
-  tidytext
+  tidytext, 
+  plyr,
+  stringr,
+  stringi,
+  tm
 )
 
 ##############################################################
@@ -80,7 +84,7 @@ pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Projec
 
 corpus_raw <- data.frame("org" = c(),"text" = c())
 
-#Successful Loop 1 !!!
+#  Trial 3 Loop was unsuccessful becasue it was rewriting data
 
 for (i in 1:length(myfiles)){
   x <- pdf_text(myfiles[i], opw = "", upw = "") 
@@ -91,9 +95,7 @@ for (i in 1:length(myfiles)){
 }
 print(x)
 
-
-
-####Successful Loop 2 organizing names!!!!! 
+# Loop was unsuccessful because it was rewriting data
 for (i in 1:length(myfiles)){
   rawtext <- pdf_text(myfiles[i], opw = "", upw = "") 
   document <- data.frame( #Creates new data frame
@@ -104,14 +106,32 @@ for (i in 1:length(myfiles)){
   corpus_raw <- rbind(corpus_raw,document)
 }
 
+# Trial 4 I'm using the code in this website
+#https://stackoverflow.com/questions/59519032/how-do-i-get-my-loop-on-pdf-text-only-to-read-all-the-files
+
+myfiles_list <- list() #Created this object to put the output of the loop
+
+for (i in 1:length(myfiles)) {
+  print(i) #to make sure the loop is working
+  myfiles_list[myfiles[[i]]] <- pdf_text(myfiles[i]) %>% # This add the output of pdf_text() to the list object. 
+  tibble() # txt = . I believe this converts to a tibble (another way to say data.frame) and makes the output be txt format
+}
+
+View(myfiles_list)
+
 
 
 
 #Saving doc
 getwd()
-#write.csv(corpus_raw, file = "corpus_raw_trial.csv", row.names = FALSE)
+#This does not work anymore
+#Do not run anymore. This is only for demosntation purposes on how it went wrong. 
+#write.csv(corpus_raw, file = "corpus_raw_failed.csv", row.names = FALSE)
 
-#Trial with own pdfs
+##############################################
+###########  Trial with own pdfs #############
+##############################################
+
 dest_latinx <- "/Users/Ela 1/Documents/LDT Mac/1. Research_2/Latinx in Academia/Dr. Masta readings"
 myfiles_latinx <- list.files(path = dest_latinx, pattern = "pdf", full.names = TRUE)
 print(myfiles_latinx)
@@ -125,9 +145,11 @@ print(y)
 #Trial 2 to find the problem
 #I'm trying this code 
 # https://stackoverflow.com/questions/59519032/how-do-i-get-my-loop-on-pdf-text-only-to-read-all-the-files 
+# I bleive this code actually works 
 files <- list.files(pattern = "pdf$")
 files_pdfs <- list()
 myfiles_latinx_list <- list()
+
 
 for (i in 1:length(myfiles_latinx))
 {
@@ -136,7 +158,6 @@ for (i in 1:length(myfiles_latinx))
     tibble(txt = .)   # %>% 
     #unnest_tokens(word, txt) # This function tokenizes so I'm not using it until I have the two column output. 
 }
-
 
 #This was to inspect each of the elements 
 z <-myfiles_latinx_list[[8]]
@@ -148,33 +169,51 @@ print(myfiles_latinx_list)
 #################### Two Column Corpus #######################
 ##############################################################
 
-# I want to use the function unite(). 
-# First, I'm going to use the function pivot_wider().
-# Then, I'll use pivot_wider
+# I'm going to transform the nested data into a regular data frame. 
 
 
-# I learned that I have problems in my first code :''''(
+#https://stackoverflow.com/questions/4227223/convert-a-list-to-a-data-frame
+library (plyr)
+#Process
+#Extract data from list of lists
+Step1 <- ldply(myfiles_list, data.frame)
 
-uniquetrial <- unique(corpus_raw$text)
+# Rename columns
+#https://statisticsglobe.com/r-error-cant-rename-columns-that-dont-exist
+Step2 <-  plyr::rename(Step1, c(".id" = "File",  
+                                "X..i.." = "TextData"))
 
-corpus_raw %>% 
-    pivot_wider(names_from = org, values_from = text)
+#Combined
+CorpusRaw <- myfiles_list  %>% 
+               ldply(data.frame) %>% 
+                 plyr::rename(., c(".id" = "File", #Need to use plyr:: to avoid issyes with dplyr package
+                                   "X..i.." = "TextData")) 
 
-
-
-corpus_raw %>%
-  dplyr::group_by(org) %>%
-  dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
-  dplyr::filter(n > 1L)
-
-
-
-id_cols = FilePDF, id_expand = TextData, 
-
-fish_encounters
-fish_encounters %>%
-  pivot_wider(names_from = station, values_from = seen)
+#Do not Run again
+#write_csv(CorpusRaw, "CorpusRaw.csv")
 
 
 
+
+
+
+
+
+
+
+
+#######################################################
+############# Corpus with Chris Bail Instructions #####
+#######################################################
+
+# GREP
+CorpusRawClean <- CorpusRaw #Create a new one to have the middle point
+CorpusRawClean$TextData <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]", "", CorpusRawClean$TextData)
+
+# Creating  a Corpus
+library(tm)
+OrgsCorpus <- Corpus(VectorSource(as.vector(CorpusRawClean$TextData))) 
+OrgsCorpus
+
+# TidyText
 

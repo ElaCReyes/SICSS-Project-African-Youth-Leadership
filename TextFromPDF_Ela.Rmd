@@ -13,13 +13,19 @@ The project is already in my preferred working directory. Regarding loading pack
 pacman::p_load(
   tidyverse,
   pdftools, 
-  tesseract
+  tesseract,
+  tidytext,
+  plyr,
+  stringr,
+  stringi,
+  tm
 )
 
-setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
+#setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
 #install.packages("pdftools")
 #setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)
 ```
+# Text from PDF Extraction
 
 Websites used: 
 1. <https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/> 
@@ -44,23 +50,37 @@ There was a corrupt file!!! "AYLS038_ColumbaLeadership.pdf". After deleting the 
 corpus_raw <- data.frame("org" = c(),"text" = c())
 ```
 
-Successful loop. Previous versions are in "ElaSandbox.R"
+## Automation
+Successful loop!!! 
+It corresponds to Trial 4. Previous versions are in "ElaSandbox.R"
 
 ```{r}
-for (i in 1:length(myfiles)){
-  rawtext <- pdf_text(myfiles[i], opw = "", upw = "") 
-  document <- data.frame( #Creates new data frame
-                        "org" = gsub(x =myfiles[i],pattern = ".pdf", replacement = ""), #This uses the gsub function of the regular expressions in R
-                         "text" = x, stringsAsFactors = FALSE
-                        )
-  colnames(document) <- c("org", "text")
-  corpus_raw <- rbind(corpus_raw,document)
+myfiles_list <- list() #Created this object to put the output of the loop
+
+for (i in 1:length(myfiles)) {
+  print(i) #to make sure the loop is working
+  myfiles_list[[myfiles[i]]] <- pdf_text(myfiles[i])  %>% # This add the output of pdf_text() to the list object. 
+  tibble(txt = .) # I believe this converts to a tibble (another way to say data.frame) and makes the output be txt format
 }
+
+View(myfiles_list)
 ```
 
+# Data Processing
+## Converting from list to data frame. Resulting in two columns and one row per document. Should be a 25 by 2 table.
+
+**I could not make this**
+I could obtain a two column table but for some esoteric reasong I really couldn't combine the rows.
 
 ```{r}
 
 ```
+
+## Creating a Corpus
+```{r}
+  
+```
+
+
 
 
