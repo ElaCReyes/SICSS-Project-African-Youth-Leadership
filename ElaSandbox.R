@@ -202,9 +202,9 @@ CorpusRaw <- myfiles_list  %>%
 
 
 
-#######################################################
-############# Corpus with Chris Bail Instructions #####
-#######################################################
+##############################################################
+############# Basic Text with Chris Bail Instructions ########
+##############################################################
 
 # GREP
 CorpusRawClean <- CorpusRaw #Create a new one to have the middle point
@@ -212,19 +212,18 @@ CorpusRawClean$TextData <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]
                                 |ÿ| ÿ |  ÿ|ÿ  |ÿ5|ÿÿ|4ÿ|http
                                 ", "", CorpusRawClean$TextData)
 
-
-
 # Tokenize
-TokenizedCorpusRawClean<- CorpusRawClean %>%
-  select(File,TextData) %>%
+TokenizedCorpusRawClean <- CorpusRawClean %>%
+  select(File,TextData) %>% #Checke whether it works only using TextData. It works w/o File variable
   unnest_tokens("word", TextData)
 head(TokenizedCorpusRawClean)
 
+
 #Count Words but we still have the stopwords
 TokenizedCorpusRawClean %>% 
-group_by(word) %>% 
-  count() %>%
-    arrange(desc(freq))
+  group_by(word) %>% 
+    count() %>%
+      arrange(desc(freq))
 
 # word freq
 # 1             and 1385
@@ -233,12 +232,10 @@ group_by(word) %>%
 # 4              in  947
 
 #Remove stopwords with tidytext
-
 data(stop_words) #Load this data of tidytext
 View(stop_words)
 TidyCorpusRawClean <- TokenizedCorpusRawClean %>%
   anti_join(stop_words) 
-  
 
 #RemoveDigits
 TidyCorpusRawClean <- TidyCorpusRawClean[-grep("\\b\\d+\\b", TidyCorpusRawClean$word),]
@@ -248,7 +245,10 @@ TidyCorpusRawClean %>%
   group_by(word) %>% 
     count() %>% 
       arrange(desc(freq)) %>% 
-  
+ 
+#Created a CSV 
+#write.csv(TidyCorpusRawClean, "TidyCorpusRawClean.csv")
+getwd()
 
 #With  Numbers
 # word freq
@@ -268,13 +268,17 @@ TidyCorpusRawClean %>%
 # 5                       african  200
 
 
+##############################################################
+#################### The Document Term Matrix ################
+##############################################################
 
-# The Document Matrix
-# Using the TidyText I COULD NOT MAKE IT!
+# I COULD NOT MAKE IT! Using the TidyText 
+# So I used the tm() package
 
 TidyOrgCorpus <- Corpus(VectorSource(as.vector(TidyCorpusRawClean$word)))
-OrgCorpus_DTM <- DocumentTermMatrix(TidyOrgCorpus, control = list(wordLengths = c(2,
-                                                                         Inf)))
+OrgCorpus_DTM <- DocumentTermMatrix(TidyOrgCorpus, 
+                                    control = list(wordLengths = c(2,
+                                                                    Inf)))
 inspect(OrgCorpus_DTM[1:25,3:8])
 
 

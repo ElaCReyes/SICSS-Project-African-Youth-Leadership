@@ -54,6 +54,8 @@ corpus_raw <- data.frame("org" = c(),"text" = c())
 Successful loop!!! 
 It corresponds to Trial 4. Previous versions are in "ElaSandbox.R"
 
+Ela add help file
+
 ```{r}
 myfiles_list <- list() #Created this object to put the output of the loop
 
