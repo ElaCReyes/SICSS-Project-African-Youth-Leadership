@@ -3,6 +3,9 @@ library(selectr)
 library(netstat) #this is where the freeport function came from for selenium
 library(RSelenium)
 
+#For Selenium, I used this tutorial: http://joshuamccrain.com/tutorials/web_scraping_R_selenium.html
+#for most of the rest of the code I used Ben M's code and then random stack overflows and made stuff up myself
+
 getwd()
 
 setwd("C:/Users/bonni/Dropbox/SICSS") #set your wd to the folder where the project list is saved as a csv
@@ -42,20 +45,20 @@ for (url in text_df$url[1:50]){
   #read in webpage
   #delayedAssign("do.next", {next})
   tryCatch({page = read_html(url) #reads html from url and calls it tmp variable "page"
-            sections = page %>% #within page, uses html_elements to copy the "sections" which I think is a css thing
-              html_elements("section") #
+            sections = page %>% 
+              html_elements("section") #within page, uses html_elements to copy the "sections" which I think is a css thing
             text_hold = list(sections %>% 
-                     html_text2())
-            list_of_text[i] = text_hold
-            if (list_of_text[i]=="character(0)")
-              rD <- rsDriver(browser="firefox", port=free_port(), verbose=F)
-              remDr <- rD[["client"]]
-              remDr$navigate(url)
+                     html_text2()) #create a list of the sections, using html_text2, scrape the text into a tmp var called text_hold
+            list_of_text[i] = text_hold #write the text_hold into the list of lists at position i
+            if (list_of_text[i]=="character(0)") #if the read_html function returns only the text "character(0)" then we use selenium to scrape instead
+              rD <- rsDriver(browser="firefox", port=free_port(), verbose=F) #initializes a remote browser using firefox
+              remDr <- rD[["client"]] #another step to setup the remote driver
+              remDr$navigate(url) #navigate the driver to your url - should open firefox and go to the url
               Sys.sleep(5) # give the page time to fully load
-              html <- remDr$getPageSource()[[1]]
-              body <- read_html(html) %>% # parse HTML
+              html <- remDr$getPageSource()[[1]] #getpagesource is the html that you couldn't get form read_html above
+              body <- read_html(html) %>% # parse HTML, write all objects starting with "<p>" from the html into an object called body
                 html_nodes("p")
-              list_of_text[[i]] <- paste(body, collapse = "</p>") #this collapses the html into a single line so it can be put into the df
+              list_of_text[[i]] <- paste(body, collapse = "</p>") #this collapses the body into a single line so it can be put into the df
   }, error = function(e) {print(url)}) #prints the urls that are no accessible
   i = i + 1  #increases the index to appropriately fill the list of lists ==in the right row
   
