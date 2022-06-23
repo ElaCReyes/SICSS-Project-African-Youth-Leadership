@@ -20,14 +20,14 @@ pacman::p_load(
 setwd("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
 getwd()
 
-#Trial 1: https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/
+#Test 1: https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/
 #Vector of pdf file names 
 file_vector <- list.files(path = "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data")
 
 results <- vlapply(file_vector, pdf_text)
 #Error in poppler_pdf_text(loadfile(pdf), opw, upw) : PDF parsing failure.
 
-#Trial 2: https://stackoverflow.com/questions/21445659/use-r-to-convert-pdf-files-to-text-files-for-text-mining
+#Test 1: https://stackoverflow.com/questions/21445659/use-r-to-convert-pdf-files-to-text-files-for-text-mining
 
 #folder with pdfs
 dest <- "/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data"
@@ -87,7 +87,7 @@ pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Projec
 
 corpus_raw <- data.frame("org" = c(),"text" = c())
 
-#  Trial 3 Loop was unsuccessful becasue it was rewriting data
+#  Test 2 Loop was unsuccessful because it was rewriting data
 
 for (i in 1:length(myfiles)){
   x <- pdf_text(myfiles[i], opw = "", upw = "") 
@@ -98,6 +98,7 @@ for (i in 1:length(myfiles)){
 }
 print(x)
 
+#Test 3
 # Loop was unsuccessful because it was rewriting data
 for (i in 1:length(myfiles)){
   rawtext <- pdf_text(myfiles[i], opw = "", upw = "") 
@@ -109,7 +110,7 @@ for (i in 1:length(myfiles)){
   corpus_raw <- rbind(corpus_raw,document)
 }
 
-# Trial 4 I'm using the code in this website
+# Test 4 I'm using the code in this website
 #https://stackoverflow.com/questions/59519032/how-do-i-get-my-loop-on-pdf-text-only-to-read-all-the-files
 
 myfiles_list <- list() #Created this object to put the output of the loop
@@ -122,6 +123,16 @@ for (i in 1:length(myfiles)) {
 
 View(myfiles_list)
 
+#Test 5 I'm using Bonnie's suggestions 
+# The previous loop created a row per each page. Becasue it was tibble. T
+# This one creates one list per document separated by a comma. 
+MyFilesList <- list() #Created this object to put the output of the loop
+i = 1
+for (i in 1:length(myfiles)) {
+  print(i) #to make sure the loop is working
+  MyFilesList[[myfiles[i]]] <- pdf_text(myfiles[i])  %>% #This adds the output of pdf_text() to the list object.
+    list(txt = .) #I believe this converts to a tibble (another way to say data.frame) and makes the output be txt format
+} #The only change is tibble() to list(txt = .)
 
 #Saving doc
 getwd()
@@ -172,6 +183,9 @@ print(myfiles_latinx_list)
 
 # I'm going to transform the nested data (list) into a regular data frame. 
 
+# Test 1: This code was based on the Test 5 of the automation. 
+# It results in the two column BUT per page!!! 
+# 963 rows....
 #https://stackoverflow.com/questions/4227223/convert-a-list-to-a-data-frame
 library (plyr)
 #Process
@@ -186,11 +200,38 @@ Step2 <-  plyr::rename(Step1, c(".id" = "File",
 #Combined
 CorpusRaw <- myfiles_list  %>% 
                ldply(data.frame) %>% 
-                 plyr::rename(., c(".id" = "File", #Need to use plyr:: to avoid issyes with dplyr package
+                 plyr::rename(., c(".id" = "File", #Need to use plyr:: to avoid issues with dplyr package
                                    "X..i.." = "TextData")) 
+
+# Test 2: Using Bonnie's work. 
+CorpusRawT2<-data.frame(matrix(ncol=2, nrow=25)) #Create a data frame T2 is because is Test 2
+colnames(CorpusRawT2) <- c('File', 'TextData') #Change names
+
+CorpusRawT2$File <- myfiles #Add names of paths to column files
+
+temp_df$text <- myfiles_temp #put the list created by the loop into the df column text
+i = 1
+for (x in temp_df$text){
+  temp_df$temp[i] <- paste(x, collapse = ",")
+  i = i + 1
+}
+
+
+
 
 #Do not Run again
 #write_csv(CorpusRaw, "CorpusRaw.csv")
+
+View(myfiles_temp)
+temp_df<-data.frame(matrix(ncol=2, nrow=17))
+colnames(temp_df) <- c('file', 'text')
+temp_df$file <- myfiles
+temp_df$text <- myfiles_temp #put the list created by the loop into the df column text
+i = 1
+for (x in temp_df$text){
+  temp_df$temp[i] <- paste(x, collapse = ",")
+  i = i + 1
+}
 
 
 ##############################################################
