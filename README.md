@@ -17,4 +17,4 @@
 -     -> Questions for next steps? 
 - [] Duplication testing of Bonnie and Ela's code (Kadija)
 - [] See if there is an easy comparison between webscrapped sites vs pdf (Rehana) 
-[] Presentation roles huddle at 16:00 
+- [] Presentation roles huddle at 16:00 
