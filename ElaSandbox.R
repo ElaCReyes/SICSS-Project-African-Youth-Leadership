@@ -170,8 +170,7 @@ print(myfiles_latinx_list)
 #################### List to Data Frame #######################
 ##############################################################
 
-# I'm going to transform the nested data into a regular data frame. 
-
+# I'm going to transform the nested data (list) into a regular data frame. 
 
 #https://stackoverflow.com/questions/4227223/convert-a-list-to-a-data-frame
 library (plyr)
@@ -192,15 +191,6 @@ CorpusRaw <- myfiles_list  %>%
 
 #Do not Run again
 #write_csv(CorpusRaw, "CorpusRaw.csv")
-
-
-
-
-
-
-
-
-
 
 
 ##############################################################
