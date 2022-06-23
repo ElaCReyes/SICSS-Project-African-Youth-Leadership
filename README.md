@@ -4,8 +4,8 @@
 
 - [x] Share the pdf data and list of urls to scrape (Rehana)
 - [x] Write proposal (Rehana)
-- [/] Scrape URLs (Bonnie and Kadija)
-- [/] PDF to text (Ela): output is a dataframe with one column is document name/ID and one column is all of the text as a single string
+- [x] Scrape URLs (Bonnie and Kadija)
+- [x] PDF to text (Ela): output is a dataframe with one column is document name/ID and one column is all of the text as a single string
    **Update**: Extracted data but yet to be in one row per document. 
 - [x] Clean text (Ela & ??): remove stop words, special characters, regular expressions, etc.
 - [] Tokenize text into individual words to examine term frequency (TBD)
