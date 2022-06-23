@@ -203,41 +203,42 @@ CorpusRaw <- myfiles_list  %>%
                  plyr::rename(., c(".id" = "File", #Need to use plyr:: to avoid issues with dplyr package
                                    "X..i.." = "TextData")) 
 
+
+#Do not Run again
+#write_csv(CorpusRaw, "CorpusRaw.csv")
+
 # Test 2: Using Bonnie's work. 
 CorpusRawT2<-data.frame(matrix(ncol=2, nrow=25)) #Create a data frame T2 is because is Test 2
 colnames(CorpusRawT2) <- c('File', 'TextData') #Change names
 
 CorpusRawT2$File <- myfiles #Add names of paths to column files
 
-temp_df$text <- myfiles_temp #put the list created by the loop into the df column text
+CorpusRawT2$TextData <- MyFilesList #put the list created by the loop into the df column text
+
+#The loop below takes the lists per each document from the step above (CorpusRawT2$TextData)
+# and collapses them using the paste() function
 i = 1
-for (x in temp_df$text){
-  temp_df$temp[i] <- paste(x, collapse = ",")
+for (x in CorpusRawT2$TextData){
+  CorpusRawT2$temp[i] <- paste(x, collapse = "") #I had to delete the comma from the collapse 
   i = i + 1
 }
 
+#Change name of third variable
+colnames(CorpusRawT2) <- c('File', 'TextData', 'TextDataCollapsed') 
+#Select Only useful variable leaving list out
+CorpusRawT2Collapsed <-  CorpusRawT2 %>%   
+  select(File, TextDataCollapsed) 
 
+class(CorpusRawT2Collapsed)
+dim(CorpusRawT2Collapsed)
 
-
-#Do not Run again
-#write_csv(CorpusRaw, "CorpusRaw.csv")
-
-View(myfiles_temp)
-temp_df<-data.frame(matrix(ncol=2, nrow=17))
-colnames(temp_df) <- c('file', 'text')
-temp_df$file <- myfiles
-temp_df$text <- myfiles_temp #put the list created by the loop into the df column text
-i = 1
-for (x in temp_df$text){
-  temp_df$temp[i] <- paste(x, collapse = ",")
-  i = i + 1
-}
-
+#write.csv(CorpusRawT2Collapsed, "CorpusRawT2Collapsed.csv")
 
 ##############################################################
 ############# Basic Text with Chris Bail Instructions ########
 ##############################################################
 
+#Take 1: 
 # GREP
 CorpusRawClean <- CorpusRaw #Create a new one to have the middle point
 CorpusRawClean$TextData <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]
@@ -298,6 +299,17 @@ TidyCorpusRawClean %>%
 
 #Created a CSV 
 #write.csv(TidyCorpusRawClean, "TidyCorpusRawClean.csv")
+
+#Take 2:
+# GREP
+CorpusRawT2CollapsedClean <- CorpusRawT2Collapsed #Create a new one to have the middle point
+CorpusRawT2CollapsedClean$TextDataCollapsed <- gsub("\n|\r|\t|\v|\f|•|·|~|-|[[:punct:]]
+                                |ÿ| ÿ |  ÿ|ÿ  |ÿ5|ÿÿ|4ÿ|http
+                                ", "", CorpusRawT2CollapsedClean$TextDataCollapsed)
+
+
+
+print(CorpusRawT2CollapsedClean$TextDataCollapsed)
 
 ##############################################################
 #################### The Document Term Matrix ################
@@ -468,8 +480,39 @@ OrgTopTermsK7 %>% #Take this object and then
   ggtitle("PDF Text Topic Modeling k = 7")
 
 
+###############################################################
+################### LDA Topic Modeling k = 13 ##################
+###############################################################
 
+OrgTopicModelK13<- LDA(OrgCorpus_DTM, #The DTM Matrix
+                      k=13, #The number of clusters you want
+                      control = list(seed = 321))
 
+OrgTopicsK13 <- tidy(OrgTopicModelK13, #The object just above. The LDA_VEM object
+                    matrix = "beta" #so that it extracts "beta" element from the LDA_VEM  object
+)
+
+# Bar graphs that describe the top terms for each topic:
+# Yes, you need the "beta" is one of the elements of the LDA_VEM object
+
+#First you need to create the data for the bar graph!
+OrgTopTermsK13 <- 
+  OrgTopicsK13 %>% #Take OrgTopics
+  group_by(topic) %>%  #group by variable topic that is 1-10 becasue we had k=10
+  top_n(7, beta) %>%  #take the top 10 based on the beta variable
+  ungroup() %>% #This one I'm not sure
+  arrange(topic, -beta)
+
+#Now You create the Bar graph
+
+OrgTopTermsK13 %>% #Take this object and then
+  mutate(term = reorder(term, beta)) %>% #in variable term, reorder the terms based on beta value
+  ggplot(mapping = aes(y = term, x = beta, fill = factor(topic))) + #fill based on topic variable and treat that variable as a factor
+  geom_col(show.legend = FALSE) + #Until here it will show a horizontal bar graph
+  facet_wrap(~ topic, scales = "free") +  # it divides into ten different bar graphs based on the topic
+  ylab("Topics")+
+  xlab("Probability of Term to be Assigned to Topic")+
+  ggtitle("PDF Text Topic Modeling k = 13")
 
 
 ###############################################################
