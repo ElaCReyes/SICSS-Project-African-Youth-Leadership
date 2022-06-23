@@ -5,9 +5,10 @@ pacman::p_load(
   tesseract,
   tidytext, 
   plyr,
-  stringr,
-  stringi,
-  tm
+  stringr, #to work with string data
+  stringi, #to work with string data
+  tm, #for text analysis
+  stm
 )
 
 ##############################################################
@@ -244,11 +245,8 @@ TidyCorpusRawClean <- TidyCorpusRawClean[-grep("\\b\\d+\\b", TidyCorpusRawClean$
 TidyCorpusRawClean %>% 
   group_by(word) %>% 
     count() %>% 
-      arrange(desc(freq)) %>% 
+      arrange(desc(freq)) 
  
-#Created a CSV 
-#write.csv(TidyCorpusRawClean, "TidyCorpusRawClean.csv")
-getwd()
 
 #With  Numbers
 # word freq
@@ -267,6 +265,8 @@ getwd()
 # 4                      refugees  237
 # 5                       african  200
 
+#Created a CSV 
+#write.csv(TidyCorpusRawClean, "TidyCorpusRawClean.csv")
 
 ##############################################################
 #################### The Document Term Matrix ################
@@ -275,11 +275,59 @@ getwd()
 # I COULD NOT MAKE IT! Using the TidyText 
 # So I used the tm() package
 
-TidyOrgCorpus <- Corpus(VectorSource(as.vector(TidyCorpusRawClean$word)))
+#Creates corpus
+TidyOrgCorpus <- Corpus(VectorSource(as.vector(TidyCorpusRawClean$word))) 
+#Creates Document Term Matrix
 OrgCorpus_DTM <- DocumentTermMatrix(TidyOrgCorpus, 
-                                    control = list(wordLengths = c(2,
-                                                                    Inf)))
+                                    control = list(wordLengths = c(2, Inf)))
+#To see how the DTM looks like
 inspect(OrgCorpus_DTM[1:25,3:8])
+#The one below shoes the corpus into a tibble. I'm actually not sure what this is for
+tidy(OrgCorpus_DTM)
+
+##############################################################
+######################## Word Counting ####################### 
+##############################################################
+
+#For word counting you need the TidyCorpusRawClean 
+TopWordsTidyCorpusRawClean <- 
+  TidyCorpusRawClean %>% 
+  group_by(word) %>% 
+  count() %>% 
+  arrange(desc(freq)) 
+
+#But we have duplicates so we need to aggregated the duplicates.
+#e.g., youth appears in two different rows
+
+#This website helped
+# https://stackoverflow.com/questions/10180132/consolidate-duplicate-rows
+#Aggregated Duplicates. 
+TidyCorpusRawCleanAggregated <- aggregate(freq~word, #formual of values ~ grouping
+                                          data = TopWordsTidyCorpusRawClean , #data set
+                                          FUN = sum) #function to apply to the formula
 
 
+#Do not run again
+#write.csv(TidyCorpusRawCleanAggregated, "TidyCorpusRawCleanAggregated.csv")
 
+#Check Top Words now
+TidyCorpusRawCleanAggregated %>% 
+  group_by(word) %>% 
+  count() %>% 
+  arrange(desc(freq)) 
+
+TidyCorpusRawCleanAggregated %>% 
+  arrange(desc(freq)) %>% 
+  slice(1:20) %>% 
+    ggplot(mapping = aes(x = reorder(word, -freq), y = freq, fill = word)) + #adding the mapping is better to avoid errors
+      geom_bar(stat = "identity") + #You need the stat = "identity" to show geom_bar that you already have the counts in y. 
+        theme_minimal() + #To delete the grey background
+          theme(axis.title = element_text(angle = 90, hjust = 1, size = 13)) + #not working pretty
+            theme(plot.title = element_text(hjust = 0.5, size=18))+
+              ylab("Frequency")+
+                xlab("")+
+                  ggtitle("Most Frequent Words in PDF Text")+
+                      guides(fill="none")
+  
+
+#theme(strip.text.x = element_text(angle = 45)) +
