@@ -8,7 +8,9 @@ pacman::p_load(
   stringr, #to work with string data
   stringi, #to work with string data
   tm, #for text analysis
-  stm
+  stm, 
+  lda,
+  topicmodels #topic models
 )
 
 ##############################################################
@@ -35,7 +37,7 @@ myfiles[1]
 
 print(myfiles)
 
-##### Checking if each of them works#####
+##### Checking if each PDF them works (First 10)#####
 # 1. AYL0S23_Bridge2Rwanda.pdf 
 # DOES NOT WORK - These are images. 
 AYL0S23_Bridge2Rwanda.pdf <- pdf_text("/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/SICSS-Project-African-Youth-Leadership/Webscraped data/AYL0S23_Bridge2Rwanda.pdf")
@@ -121,12 +123,10 @@ for (i in 1:length(myfiles)) {
 View(myfiles_list)
 
 
-
-
 #Saving doc
 getwd()
 #This does not work anymore
-#Do not run anymore. This is only for demosntation purposes on how it went wrong. 
+#Do not run again. This is only for demosntation purposes on how it went wrong. 
 #write.csv(corpus_raw, file = "corpus_raw_failed.csv", row.names = FALSE)
 
 ##############################################
@@ -307,6 +307,8 @@ TidyCorpusRawCleanAggregated <- aggregate(freq~word, #formual of values ~ groupi
                                           FUN = sum) #function to apply to the formula
 
 
+
+
 #Do not run again
 #write.csv(TidyCorpusRawCleanAggregated, "TidyCorpusRawCleanAggregated.csv")
 
@@ -330,4 +332,42 @@ TidyCorpusRawCleanAggregated %>%
                       guides(fill="none")
   
 
-#theme(strip.text.x = element_text(angle = 45)) +
+#theme(strip.text.x = element_text(angle = 45)) 
+
+###############################################################
+################### Topic Modeling k =10 ######################
+###############################################################
+
+OrgTopicModel<- LDA(OrgCorpus_DTM, #The DTM Matrix
+                    k=10, #The number of clusters you want
+                    control = list(seed = 321))
+
+OrgTopics <- tidy(OrgTopicModel, #The object just above. The LDA_VEM object
+                  matrix = "beta" #so that it extracts "beta" element from the LDA_VEM  object
+                  )
+
+# Bar graphs that describe the top terms for each topic:
+# Yes, you need the "beta" is one of the elements of the LDA_VEM object
+
+#First you need to create the data for the bra graph!
+OrgTopTerms <- 
+  OrgTopics %>% #Take OrgTopics
+  group_by(topic) %>%  #gropu by variable topic that is 1-10 becasue we had k=10
+  top_n(10, beta) %>%  #take the top 10 based on the beta variable
+  ungroup() %>% #This one I'm not sure
+  arrange(topic, -beta)
+  
+#Now You create the Bar graph
+
+OrgTopTerms %>% #Take this object and then
+  mutate(term = reorder(term, beta)) %>% #in variable term, reorder the terms based on beta value
+  ggplot(mapping = aes(y = term, x = beta, fill = factor(topic))) + #fill based on topic variable and treat that variable as a factor
+  geom_col(show.legend = FALSE) + #Until here it will show a horizontal bar graph
+  facet_wrap(~ topic, scales = "free") +  # it divides into ten different bar graphs based on the topic
+  ylab("Topics")+
+  xlab("Probability of Term to be Assigned to Topic")+
+  ggtitle("PDF Text Topic Modeling k = 10")
+
+  
+
+
