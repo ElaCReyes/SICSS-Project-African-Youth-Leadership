@@ -25,12 +25,10 @@ pacman::p_load(
 #install.packages("pdftools")
 #setwd(/Users/Ela 1/Documents/LDT Mac/7. ProfessionalDevelopment/SICSS_Project/)
 ```
+
 # Text from PDF Extraction
 
-Websites used: 
-1. <https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/> 
-2. <https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/> 
-3. <https://www.i3s.unice.fr/~malapert/R/pdf/base-r.pdf>
+Websites used: 1. <https://www.r-bloggers.com/2018/01/how-to-extract-data-from-a-pdf-file-with-r/> 2. <https://alexluscombe.ca/blog/getting-your-.pdfs-into-r/> 3. <https://www.i3s.unice.fr/~malapert/R/pdf/base-r.pdf>
 
 Create an object that has the path of my folder with pdfs
 
@@ -51,8 +49,8 @@ corpus_raw <- data.frame("org" = c(),"text" = c())
 ```
 
 ## Automation
-Successful loop!!! 
-It corresponds to Trial 4. Previous versions are in "ElaSandbox.R"
+
+Successful loop!!! It corresponds to Trial 4. Previous versions are in "ElaSandbox.R"
 
 Ela add help file
 
@@ -69,20 +67,17 @@ View(myfiles_list)
 ```
 
 # Data Processing
+
 ## Converting from list to data frame. Resulting in two columns and one row per document. Should be a 25 by 2 table.
 
-**I could not make this**
-I could obtain a two column table but for some esoteric reasong I really couldn't combine the rows.
+**I could not make this** I could obtain a two column table but for some esoteric reasong I really couldn't combine the rows.
 
 ```{r}
 
 ```
 
 ## Creating a Corpus
+
 ```{r}
   
 ```
-
-
-
-

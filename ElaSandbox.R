@@ -167,7 +167,7 @@ View(z)
 print(myfiles_latinx_list)
 
 ##############################################################
-#################### Two Column Corpus #######################
+#################### List to Data Frame #######################
 ##############################################################
 
 # I'm going to transform the nested data into a regular data frame. 
@@ -335,7 +335,7 @@ TidyCorpusRawCleanAggregated %>%
 #theme(strip.text.x = element_text(angle = 45)) 
 
 ###############################################################
-################### Topic Modeling k =10 ######################
+################### LDA Topic Modeling k =10 ##################
 ###############################################################
 
 OrgTopicModel<- LDA(OrgCorpus_DTM, #The DTM Matrix
@@ -369,7 +369,7 @@ OrgTopTerms %>% #Take this object and then
   ggtitle("PDF Text Topic Modeling k = 10")
 
 ###############################################################
-################### Topic Modeling k = 5 ######################
+################### LDA Topic Modeling k = 5 ##################
 ###############################################################
   
 OrgTopicModelK5<- LDA(OrgCorpus_DTM, #The DTM Matrix
@@ -403,7 +403,7 @@ OrgTopTermsK5 %>% #Take this object and then
   ggtitle("PDF Text Topic Modeling k = 5")
 
 ###############################################################
-################### Topic Modeling k = 7 ######################
+################### LDA Topic Modeling k = 7 ##################
 ###############################################################
 
 OrgTopicModelK7<- LDA(OrgCorpus_DTM, #The DTM Matrix
@@ -439,4 +439,9 @@ OrgTopTermsK7 %>% #Take this object and then
 
 
 
+
+
+###############################################################
+################### Structural Topic Modeling #################
+###############################################################
 
