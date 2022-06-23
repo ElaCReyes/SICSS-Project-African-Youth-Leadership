@@ -353,7 +353,7 @@ OrgTopics <- tidy(OrgTopicModel, #The object just above. The LDA_VEM object
 OrgTopTerms <- 
   OrgTopics %>% #Take OrgTopics
   group_by(topic) %>%  #gropu by variable topic that is 1-10 becasue we had k=10
-  top_n(10, beta) %>%  #take the top 10 based on the beta variable
+  top_n(7, beta) %>%  #take the top 10 based on the beta variable
   ungroup() %>% #This one I'm not sure
   arrange(topic, -beta)
   
@@ -368,6 +368,75 @@ OrgTopTerms %>% #Take this object and then
   xlab("Probability of Term to be Assigned to Topic")+
   ggtitle("PDF Text Topic Modeling k = 10")
 
+###############################################################
+################### Topic Modeling k = 5 ######################
+###############################################################
   
+OrgTopicModelK5<- LDA(OrgCorpus_DTM, #The DTM Matrix
+                    k=5, #The number of clusters you want
+                    control = list(seed = 321))
+
+OrgTopicsK5 <- tidy(OrgTopicModelK5, #The object just above. The LDA_VEM object
+                  matrix = "beta" #so that it extracts "beta" element from the LDA_VEM  object
+)
+
+# Bar graphs that describe the top terms for each topic:
+# Yes, you need the "beta" is one of the elements of the LDA_VEM object
+
+#First you need to create the data for the bra graph!
+OrgTopTermsK5 <- 
+  OrgTopicsK5 %>% #Take OrgTopics
+  group_by(topic) %>%  #gropu by variable topic that is 1-10 becasue we had k=10
+  top_n(7, beta) %>%  #take the top 10 based on the beta variable
+  ungroup() %>% #This one I'm not sure
+  arrange(topic, -beta)
+
+#Now You create the Bar graph
+
+OrgTopTermsK5 %>% #Take this object and then
+  mutate(term = reorder(term, beta)) %>% #in variable term, reorder the terms based on beta value
+  ggplot(mapping = aes(y = term, x = beta, fill = factor(topic))) + #fill based on topic variable and treat that variable as a factor
+  geom_col(show.legend = FALSE) + #Until here it will show a horizontal bar graph
+  facet_wrap(~ topic, scales = "free") +  # it divides into ten different bar graphs based on the topic
+  ylab("Topics")+
+  xlab("Probability of Term to be Assigned to Topic")+
+  ggtitle("PDF Text Topic Modeling k = 5")
+
+###############################################################
+################### Topic Modeling k = 7 ######################
+###############################################################
+
+OrgTopicModelK7<- LDA(OrgCorpus_DTM, #The DTM Matrix
+                      k=7, #The number of clusters you want
+                      control = list(seed = 321))
+
+OrgTopicsK7 <- tidy(OrgTopicModelK7, #The object just above. The LDA_VEM object
+                    matrix = "beta" #so that it extracts "beta" element from the LDA_VEM  object
+)
+
+# Bar graphs that describe the top terms for each topic:
+# Yes, you need the "beta" is one of the elements of the LDA_VEM object
+
+#First you need to create the data for the bar graph!
+OrgTopTermsK7 <- 
+  OrgTopicsK7 %>% #Take OrgTopics
+  group_by(topic) %>%  #group by variable topic that is 1-10 becasue we had k=10
+  top_n(7, beta) %>%  #take the top 10 based on the beta variable
+  ungroup() %>% #This one I'm not sure
+  arrange(topic, -beta)
+
+#Now You create the Bar graph
+
+OrgTopTermsK7 %>% #Take this object and then
+  mutate(term = reorder(term, beta)) %>% #in variable term, reorder the terms based on beta value
+  ggplot(mapping = aes(y = term, x = beta, fill = factor(topic))) + #fill based on topic variable and treat that variable as a factor
+  geom_col(show.legend = FALSE) + #Until here it will show a horizontal bar graph
+  facet_wrap(~ topic, scales = "free") +  # it divides into ten different bar graphs based on the topic
+  ylab("Topics")+
+  xlab("Probability of Term to be Assigned to Topic")+
+  ggtitle("PDF Text Topic Modeling k = 7")
+
+
+
 
 
